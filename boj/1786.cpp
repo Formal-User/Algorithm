@@ -17,6 +17,9 @@ char T[MAX], P[MAX];
 int pre[MAX];
 vector<int> ret;
 
+//bef는 이전까지 얼마나 매칭이 되었는가를 나타냄
+//매칭되면 bef를 증가시킴.
+//아닐경우 이전까지 매칭된 자리에서의 다음 글자와 같을 경우 그 매칭된 수로 넘어감. 또는 처음부터 시작
 void preprocess() {
 	int bef = 0;
 	for (int i = 1; P[i]; i++) {
