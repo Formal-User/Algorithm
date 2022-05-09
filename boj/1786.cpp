@@ -40,7 +40,7 @@ void process() {
 		}
 		else if (j) {
 			j = pre[j - 1];
-            j = (P[j] != T[i]) ? 0 : j+1;
+			j = (P[j] != T[i]) ? 0 : j + 1;
 		}
 		if (P[j] == '\0') {
 			ret.push_back(i - j + 2);
