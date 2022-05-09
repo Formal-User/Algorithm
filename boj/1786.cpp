@@ -21,33 +21,29 @@ vector<int> ret;
 //매칭되면 bef를 증가시킴.
 //아닐경우 이전까지 매칭된 자리에서의 다음 글자와 같을 경우 그 매칭된 수로 넘어감. 또는 처음부터 시작
 void preprocess() {
-	int bef = 0;
+	int j = 0;
 	for (int i = 1; P[i]; i++) {
-		if (P[i] == P[bef]) {
-			pre[i] = ++bef;
+		if (P[i] == P[j])
+			j++;
+		else if (j) {
+			j = pre[j - 1];
+			j = (P[i] == P[j]) ? j + 1 : 0;
 		}
-		else {
-			if (bef != 0 && P[i] == P[pre[bef - 1]])
-				pre[i] = bef = pre[bef - 1] + 1;
-			else
-				bef = 0;
-		}
+		pre[i] = j;
 	}
 }
 
 void process() {
 	int j = 0;
 	for (int i = 0; T[i]; i++) {
-		if (T[i] == P[j]) {
+		if (T[i] == P[j])
 			j++;
-		}
 		else if (j) {
 			j = pre[j - 1];
-			j = (P[j] != T[i]) ? 0 : j + 1;
+			j = (T[i] == P[j]) ? j + 1 : 0;
 		}
-		if (P[j] == '\0') {
+		if (!P[j])
 			ret.push_back(i - j + 2);
-		}
 	}
 }
 
@@ -62,3 +58,4 @@ int main() {
 		printf("%d ", ret[i]);
 	return 0;
 }
+
